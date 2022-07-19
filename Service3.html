@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+</head>
+<body>
+    
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <h2>This is set time out function example</h2>
+        <h4>{{welcome}}</h4>
+    </div>
+
+    <script>
+            var app = angular.module("myApp", []).controller('myCtrl', function($scope, $timeout){
+            $scope.welcome = "Welcome to angular js examples";
+            $timeout(function(){
+                $scope.welcome = "Your learning Great...";
+            },2000);
+        });
+
+    </script>
+</body>
+</html>

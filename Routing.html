@@ -1,0 +1,168 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Cookie);
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font: 15px/1.3 "Open Sans", sans-serif;
+        color: #5e5b64;
+        text-align: center;
+      }
+
+      a,
+      a:visited {
+        outline: none;
+        color: #389dc1;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      section,
+      footer,
+      header,
+      aside,
+      nav {
+        display: block;
+      }
+
+      /*-------------------------
+    The order form
+--------------------------*/
+
+      form {
+        background-color: #61a1bc;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px #ccc;
+        width: 400px;
+        padding: 35px 60px;
+        margin: 50px auto;
+      }
+
+      form h1 {
+        color: #fff;
+        font-size: 64px;
+        font-family: "Cookie", cursive;
+        font-weight: normal;
+        line-height: 1;
+        text-shadow: 0 3px 0 rgb(240, 23, 23);
+      }
+
+      form ul {
+        list-style: none;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: left;
+        margin: 20px 0 15px;
+      }
+
+      form ul li {
+        padding: 20px 30px;
+        background-color: #121311;
+        margin-bottom: 8px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      form ul li span {
+        float: right;
+      }
+
+      form ul li.active {
+        background-color: #e4b73b;
+      }
+
+      div.total {
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 15px 30px;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: left;
+        color: #fff;
+      }
+
+      div.total span {
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <form ng-app ng-controller="stationController">
+      <h2>Stations</h2>
+      <ul>
+        <li
+          ng-repeat="station in stations"
+          ng-click="toggleActive(station)"
+          ng-class="{active:station.active}"
+        >
+          {{station.name}} <span>{{station.price | currency}}</span>
+        </li>
+      </ul>
+      <div class="total">Total: <span>{{total() | currency}}</span></div>
+    </form>
+
+    <script>
+      function stationController($scope) {
+        $scope.stations = [
+          {
+            name: "delhi",
+            price: 1000,
+            active: true,
+          },
+          {
+            name: "mumbai",
+            price: 800,
+            active: false,
+          },
+          {
+            name: "chennai",
+            price: 750,
+            active: false,
+          },
+          {
+            name: "bengalore",
+            price: 750,
+            active: false,
+          },
+          {
+            name: "warangal",
+            price: 600,
+            active: false,
+          },
+          {
+            name: "nampally",
+            price: 100,
+            active: false,
+          },
+        ];
+
+        $scope.toggleActive = function(s){
+          s.active = !s.active;
+        };
+
+        $scope.total = function () {
+            var total = 0;
+          angular.forEach($scope.stations, s => {
+            if (s.active) {
+              total += s.price;
+            }
+          });
+          return total;
+        };
+      }
+    </script>
+  </body>
+</html>
